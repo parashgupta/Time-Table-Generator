@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.demo.timetable.Entity.Course;
-import com.demo.timetable.Repository.courseRepository;
+import com.demo.timetable.Repository.CourseRepository;
 
 @Service
 public class CourseServiceImpl implements CourseService {
 
     @Autowired
-    private courseRepository courseRepo;
+    private CourseRepository courseRepo;
 
     @Override
     public Course saveCourse(Course course) {
