@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-Table-Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Course and Semester Selection</h2>
+        <form id="courseForm" action="#" onsubmit="return showAdditionalInfo()">
+            <div class="form-group">
+                <label for="course">Select Course:</label>
+                <select id="course" name="course">
+                    <option value="mca">BCA</option>
+                    <option value="bca">MCA</option>
+                    <option value="msc">M.Sc</option>
+                    <option value="mba">MBA</option>
+                    <option value="mba">M.Tech</option>
+                    <option value="pgdca">PGDCA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="semester">Select Semester:</label>
+                <select id="semester" name="semester">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="3">5</option>
+                    <option value="4">6</option>
+                </select>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+        <div id="additionalInfo" class="additional-info">
+            <form id="additionalInfoForm">
+                <div class="form-row">
+                    <label for="cloudComputing">Cloud Computing:</label>
+                    <input type="text" id="cloudComputing" name="cloudComputing" placeholder="Enter Faculty Name">
+                </div>
+                <div class="form-row">
+                    <label for="iot">Internet of Things:</label>
+                    <input type="text" id="iot" name="iot" placeholder="Enter Faculty Name">
+                </div>
+                <div class="form-row">
+                    <label for="dataStructure">Data Structure:</label>
+                    <input type="text" id="dataStructure" name="dataStructure" placeholder="Enter Faculty Name">
+                </div>
+                <div class="form-row">
+                    <label for="cyberSecurity">Cyber Security:</label>
+                    <input type="text" id="cyberSecurity" name="cyberSecurity" placeholder="Enter Faculty Name">
+                </div>
+                <div class="form-row">
+                    <label for="dbms">Database Management System:</label>
+                    <input type="text" id="dbms" name="dbms" placeholder="Enter Faculty Name">
+                </div>
+                <div class="section-swipe">
+                    <label for="section">Section:</label>
+                    <select id="section" onchange="toggleInputField()">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                    <input type="text" id="inputField" placeholder="Enter something" style="display: none;">
+                </div>
+                <input type="submit" value="Submit Additional Info">
+            </form>
+        </div>
+    </div>
+    <script src ="script.js"></script>
+    
+</body>
+</html>

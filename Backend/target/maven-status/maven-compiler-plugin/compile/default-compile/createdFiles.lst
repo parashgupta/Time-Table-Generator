@@ -1,0 +1,6 @@
+com/demo/timetable/Service/CourseService.class
+com/demo/timetable/Repository/courseRepository.class
+com/demo/timetable/TimeTableApplication.class
+com/demo/timetable/Entity/Course.class
+com/demo/timetable/Controller/MyController.class
+com/demo/timetable/Service/CourseServiceImpl.class
