@@ -1,7 +1,11 @@
 package com.demo.timetable.Entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,6 +17,13 @@ public class SubMapping {
     private String sid_f;
     private Integer csid_f;
 
+     @ManyToOne
+    @JoinColumn(name = "sid_f", referencedColumnName = "sid", insertable = false, updatable = false)
+    private Subject subject;
+
+    @ManyToOne
+    @JoinColumn(name = "csid_f", referencedColumnName = "csid", insertable = false, updatable = false)
+    private CourseSemester courseSemester;
     public SubMapping()
     {
         super();
@@ -67,6 +78,11 @@ public class SubMapping {
      */
     public void setCsid_f(Integer csid_f) {
         this.csid_f = csid_f;
+    }
+
+    public List<String> getSubjectByCourseAndSemester(String courseName, String semester) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getSubjectByCourseAndSemester'");
     }
 
 }

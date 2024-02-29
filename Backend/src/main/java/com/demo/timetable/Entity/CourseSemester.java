@@ -21,10 +21,6 @@ public class CourseSemester {
     @JoinColumn(name = "cid_f", referencedColumnName="cid", insertable = false, updatable = false)
     private Course course;
 
-    @ManyToOne
-    @JoinColumn(name = "csid_f", referencedColumnName="csid", insertable = false, updatable = false)
-    private SubMapping subMapping;
-
     public CourseSemester()
     {
         super();

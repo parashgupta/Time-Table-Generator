@@ -3,6 +3,7 @@ package com.demo.timetable.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.timetable.Entity.Course;
+import com.demo.timetable.Service.CourseSemesterService;
 import com.demo.timetable.Service.CourseService;
 
 import java.util.List;
@@ -10,8 +11,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,6 +24,8 @@ public class MyController {
 
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private CourseSemesterService courseSemesterService;
 
     @GetMapping("welcome")
     public String printout()
@@ -43,6 +44,12 @@ public class MyController {
     @GetMapping("/courseName")
     public List<String> getSemByCourse(@RequestParam(defaultValue = "defaultCourse") String courseName) {
         return courseService.getSemByCourse(courseName);
+    }
+
+    //get subject by coursename and semester
+    @GetMapping("/courseName/semester")
+    public List<String> getSubjectByCourseAndSemester(@RequestParam(defaultValue = "defaultCourse") String courseName, @RequestParam String semester) {
+        return courseSemesterService.getSubjectByCourseAndSemester(courseName,semester);
     }
     
 }
