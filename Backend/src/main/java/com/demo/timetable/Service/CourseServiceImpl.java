@@ -1,5 +1,7 @@
 package com.demo.timetable.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,11 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Iterable<Course> getAllCourse() {
        return courseRepo.findAll();
+    }
+
+    @Override
+    public List<String> getSemByCourse(String courseName) {
+        return courseRepo.findSemByCourse(courseName);
     }
     
 }

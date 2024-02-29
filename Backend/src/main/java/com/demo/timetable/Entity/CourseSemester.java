@@ -3,6 +3,8 @@ package com.demo.timetable.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +16,10 @@ public class CourseSemester {
     private Integer cid_f;
     private String semester;
     private Boolean section;
+
+    @ManyToOne
+    @JoinColumn(name = "cid_f", referencedColumnName="cid", insertable = false, updatable = false)
+    private Course course;
 
     public CourseSemester()
     {

@@ -1,14 +1,16 @@
 package com.demo.timetable.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="credit_P")
+@Table(name="credit_p")
 public class CreditP {
 
     @Id
+    @Column(name = "cr_id", nullable = false)
     private Integer cr_id;
     private Integer credit;
     private Integer LT;
@@ -23,9 +25,6 @@ public class CreditP {
         this.LT=LT;
         this.P=P;
     }
-
-    
-    
 
     /**
      * @return Integer return the cr_id
