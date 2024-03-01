@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface CourseSemesterService {
 
-    List<String> getSubjectByCourseAndSemester(String courseName, String semester);
+    // List<String> getSubjectByCourseAndSemester(String courseName, String semester);
     
 }

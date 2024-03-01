@@ -13,10 +13,10 @@ public class CourseSemesterServiceImpl implements CourseSemesterService {
     @Autowired
     private CourseSemesterRepository courseSemesterRepo;
 
-    @Override
-    public List<String> getSubjectByCourseAndSemester(String courseName, String semester) {
+    // @Override
+    // public List<String> getSubjectByCourseAndSemester(String courseName, String semester) {
         
-        return courseSemesterRepo.findSubjectByCourseAndSemester(courseName,semester); 
-    }
+    //     return courseSemesterRepo.findSubjectByCourseAndSemester(courseName,semester); 
+    // }
     
 }

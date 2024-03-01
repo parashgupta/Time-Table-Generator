@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.demo.timetable.Entity.Course;
 import com.demo.timetable.Service.CourseSemesterService;
 import com.demo.timetable.Service.CourseService;
+import com.demo.timetable.Service.SubMappingService;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class MyController {
     @Autowired
     private CourseService courseService;
     @Autowired
-    private CourseSemesterService courseSemesterService;
+    private SubMappingService subMappingService;
 
     @GetMapping("welcome")
     public String printout()
@@ -49,7 +50,7 @@ public class MyController {
     //get subject by coursename and semester
     @GetMapping("/courseName/semester")
     public List<String> getSubjectByCourseAndSemester(@RequestParam(defaultValue = "defaultCourse") String courseName, @RequestParam String semester) {
-        return courseSemesterService.getSubjectByCourseAndSemester(courseName,semester);
+        return subMappingService.getSubjectByCourseAndSemester(courseName,semester);
     }
     
 }
