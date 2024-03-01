@@ -18,6 +18,7 @@ export class CourseComponent implements OnInit {
   selectedCourse: string = '';
   selectedSemester: string = '';
   isFormValid: boolean = false;
+  subjects: String[] = [];
 
   ngOnInit(): void {
     let response = this.http.get("http://localhost:8080/course");
@@ -27,6 +28,15 @@ export class CourseComponent implements OnInit {
   onSubmit(form: NgForm) {
     if (this.isFormValid) {
     this.additionalInfoDisplay = 'block';
+    this.semesterService.getSubjects(this.selectedCourse, this.selectedSemester).subscribe(
+      (subjects: String[]) => {
+        this.subjects = subjects;
+        console.log('Subjects:', this.subjects); // Log subjects to the console
+      },
+      (error) => {
+        console.error('Error fetching subjects:', error);
+      }
+    );
     }
   }
 
@@ -50,5 +60,9 @@ export class CourseComponent implements OnInit {
     this.isFormValid = this.selectedCourse !== '' && this.selectedSemester !== '';
   }
 
+  onSemesterChange(): void {
+    this.isFormValid = this.selectedCourse !== '' && this.selectedSemester !== '';
+  }
+  
   
 }
