@@ -1,5 +1,6 @@
-<!-- <img id="back" src="../../assets/image/Media.jpeg" alt="background"> -->
-    <div class="container">
+<!-- <img id="back" src="../../assets/image/Media.png" alt="background"> -->
+<div class="main-container">  
+<div class="container">
             <h2>Course and Semester Selection</h2>
             <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)">
                 <div class="form-group">
@@ -17,7 +18,7 @@
                       <option *ngFor="let semester of semesters">{{semester}}</option>
                     </select>
                   </div>
-                <input type="submit" value="Submit" [disabled]="!isFormValid">
+                <!-- <input type="submit" value="Submit" [disabled]="!isFormValid"> -->
               </form>
             <!-- <div id="additionalInfo" class="additional-info"> -->
                 <div id="additionalInfo" class="additional-info" [style.display]="additionalInfoDisplay">
@@ -34,7 +35,8 @@
                         </select>
                         <input type="text" id="inputField" placeholder="Enter something" style="display: none;">
                     </div>
-                    <input type="submit" value="Submit Additional Info">
+                    <input type="submit" value="Submit">
                 </form>
             </div>
         </div>
+      </div>  

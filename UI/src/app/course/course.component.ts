@@ -26,18 +26,7 @@ export class CourseComponent implements OnInit {
   }
   
   onSubmit(form: NgForm) {
-    if (this.isFormValid) {
-    this.additionalInfoDisplay = 'block';
-    this.semesterService.getSubjects(this.selectedCourse, this.selectedSemester).subscribe(
-      (subjects: String[]) => {
-        this.subjects = subjects;
-        console.log('Subjects:', this.subjects); // Log subjects to the console
-      },
-      (error) => {
-        console.error('Error fetching subjects:', error);
-      }
-    );
-    }
+    
   }
 
   toggleInputField() {
@@ -62,6 +51,19 @@ export class CourseComponent implements OnInit {
 
   onSemesterChange(): void {
     this.isFormValid = this.selectedCourse !== '' && this.selectedSemester !== '';
+    if (this.isFormValid) {
+      this.additionalInfoDisplay = 'block';
+      this.semesterService.getSubjects(this.selectedCourse, this.selectedSemester).subscribe(
+        (subjects: String[]) => {
+          this.subjects = subjects;
+          console.log('Subjects:', this.subjects); // Log subjects to the console
+        },
+        (error) => {
+          console.error('Error fetching subjects:', error);
+        }
+      );
+      }
+
   }
   
   
