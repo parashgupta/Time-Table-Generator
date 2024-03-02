@@ -19,6 +19,7 @@ export class CourseComponent implements OnInit {
   selectedSemester: string = '';
   isFormValid: boolean = false;
   subjects: String[] = [];
+  faculty: String[] = [];
 
   ngOnInit(): void {
     let response = this.http.get("http://localhost:8080/course");
@@ -52,19 +53,31 @@ export class CourseComponent implements OnInit {
   onSemesterChange(): void {
     this.isFormValid = this.selectedCourse !== '' && this.selectedSemester !== '';
     if (this.isFormValid) {
-      this.additionalInfoDisplay = 'block';
-      this.semesterService.getSubjects(this.selectedCourse, this.selectedSemester).subscribe(
-        (subjects: String[]) => {
-          this.subjects = subjects;
-          console.log('Subjects:', this.subjects); // Log subjects to the console
-        },
-        (error) => {
-          console.error('Error fetching subjects:', error);
-        }
-      );
+    this.additionalInfoDisplay = 'block';
+    this.semesterService.getSubjects(this.selectedCourse, this.selectedSemester).subscribe(
+      (subjects: String[]) => {
+        this.subjects = subjects;
+        console.log('Subjects:', this.subjects); // Log subjects to the console
+      },
+      (error) => {
+        console.error('Error fetching subjects:', error);
       }
-
+    );
+    }
   }
-  
-  
+
+
+  onInputChanged(event: any): void {
+    const facultyName: string = event.target.value;
+    // Call the API when the input changes
+    this.semesterService.getFaculty(facultyName).subscribe(
+      (data: string[]) => {
+        this.faculty = data;
+      },
+      (error) => {
+        console.error('Error fetching faculty:', error);
+      }
+    );
+    console.log(this.faculty);
+  }
 }

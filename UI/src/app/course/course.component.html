@@ -2,7 +2,7 @@
 <div class="main-container">  
 <div class="container">
             <h2>Course and Semester Selection</h2>
-            <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)">
+            <!-- <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)"> -->
                 <div class="form-group">
                     <label for="course">Select Course:</label>
                     <select id="course" name="course" [(ngModel)]="selectedCourse" (change)="onCourseChange()" required>
@@ -18,14 +18,12 @@
                       <option *ngFor="let semester of semesters">{{semester}}</option>
                     </select>
                   </div>
-                <!-- <input type="submit" value="Submit" [disabled]="!isFormValid"> -->
-              </form>
             <!-- <div id="additionalInfo" class="additional-info"> -->
                 <div id="additionalInfo" class="additional-info" [style.display]="additionalInfoDisplay">
                     <form id="additionalInfoForm">
                       <div class="form-row" *ngFor="let subject of subjects">
                         <label for="{{subject}}">{{subject}}:</label>
-                        <input type="text" [id]="subject" [name]="subject" placeholder="Enter Faculty Name">
+                        <input type="text" [id]="subject" [name]="subject" placeholder="Enter Faculty Name" (input)="onInputChanged($event)">
                       </div>
                     <div class="section-swipe">
                         <label for="section">Section:</label>

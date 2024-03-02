@@ -22,4 +22,10 @@ export class SemesterService {
     const url = `http://localhost:8080/course/subject?courseName=${selectedCourse}&semester=${selectedSemester}`;
     return this.http.get<string[]>(url);
   }
+
+  getFaculty(facultyName: String)
+  {
+    const url = `http://localhost:8080/course/name?name=${facultyName}`;
+    return this.http.get<string[]>(url);
+  }
 }

@@ -3,8 +3,10 @@ package com.demo.timetable.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.timetable.Entity.Course;
+import com.demo.timetable.Entity.Faculty;
 import com.demo.timetable.Service.CourseSemesterService;
 import com.demo.timetable.Service.CourseService;
+import com.demo.timetable.Service.FacultyService;
 import com.demo.timetable.Service.SubMappingService;
 
 import java.util.List;
@@ -27,6 +29,8 @@ public class MyController {
     private CourseService courseService;
     @Autowired
     private SubMappingService subMappingService;
+    @Autowired
+    private FacultyService facultysService;
 
     @GetMapping("welcome")
     public String printout()
@@ -52,5 +56,11 @@ public class MyController {
     public List<String> getSubjectByCourseAndSemester(@RequestParam(defaultValue = "defaultCourse") String courseName, @RequestParam String semester) {
         return subMappingService.getSubjectByCourseAndSemester(courseName,semester);
     }
+
+    @GetMapping("/name")
+    public List<String> getFacultyNameByStartPattern(@RequestParam String name) {
+        return facultysService.getFacultyNameByStartPattern(name);
+    }
+    
     
 }
