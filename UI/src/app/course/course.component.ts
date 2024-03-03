@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SemesterService } from '../semester.service';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
@@ -17,9 +18,10 @@ export class CourseComponent implements OnInit {
   additionalInfoDisplay: string = 'none';
   selectedCourse: string = '';
   selectedSemester: string = '';
+  selectedFaculty: string[] = [];
   isFormValid: boolean = false;
-  subjects: String[] = [];
-  faculty: String[] = [];
+  subjects: string[] = [];
+  faculty: string[] = [];
 
   ngOnInit(): void {
     let response = this.http.get("http://localhost:8080/course");
@@ -55,7 +57,7 @@ export class CourseComponent implements OnInit {
     if (this.isFormValid) {
     this.additionalInfoDisplay = 'block';
     this.semesterService.getSubjects(this.selectedCourse, this.selectedSemester).subscribe(
-      (subjects: String[]) => {
+      (subjects: string[]) => {
         this.subjects = subjects;
         console.log('Subjects:', this.subjects); // Log subjects to the console
       },
@@ -66,18 +68,19 @@ export class CourseComponent implements OnInit {
     }
   }
 
-
-  onInputChanged(event: any): void {
-    const facultyName: string = event.target.value;
-    // Call the API when the input changes
+  onChangeSearch(facultyName: string) {
     this.semesterService.getFaculty(facultyName).subscribe(
       (data: string[]) => {
         this.faculty = data;
+        console.log('faculty:', this.faculty);
       },
       (error) => {
         console.error('Error fetching faculty:', error);
       }
     );
-    console.log(this.faculty);
+  }
+
+  onFacultySelected(faculty: string, index: number) {
+    this.selectedFaculty[index] = faculty;
   }
 }

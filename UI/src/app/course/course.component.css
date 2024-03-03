@@ -47,7 +47,8 @@ body {
     color: #555;
   }
   
-  select, input[type="text"], input[type="submit"] {
+  select, input[type="text"], input[type="submit"],  ng-autocomplete
+  {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -86,3 +87,4 @@ body {
     }
   }
   
+ 

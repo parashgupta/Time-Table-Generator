@@ -8,24 +8,24 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SemesterService {
-  private baseUrl = 'http://localhost:8080/course/courseName';
+  private baseUrl = 'http://localhost:8080/course';
 
   constructor(private http: HttpClient) {}
 
   getSemesters(courseName: string): Observable<any> {
-    const url = `${this.baseUrl}?courseName=${courseName}`;
+    const url = `${this.baseUrl}/courseName?courseName=${courseName}`;
     return this.http.get(url);
   }
 
-  getSubjects(selectedCourse: String,selectedSemester: String)
+  getSubjects(selectedCourse: string,selectedSemester: string)
   {
-    const url = `http://localhost:8080/course/subject?courseName=${selectedCourse}&semester=${selectedSemester}`;
+    const url = `${this.baseUrl}/subject?courseName=${selectedCourse}&semester=${selectedSemester}`;
     return this.http.get<string[]>(url);
   }
 
-  getFaculty(facultyName: String)
+  getFaculty(facultyName: string): Observable<string[]>
   {
-    const url = `http://localhost:8080/course/name?name=${facultyName}`;
+    const url = `${this.baseUrl}/name?name=${facultyName}`;
     return this.http.get<string[]>(url);
   }
 }

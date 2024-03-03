@@ -21,9 +21,20 @@
             <!-- <div id="additionalInfo" class="additional-info"> -->
                 <div id="additionalInfo" class="additional-info" [style.display]="additionalInfoDisplay">
                     <form id="additionalInfoForm">
-                      <div class="form-row" *ngFor="let subject of subjects">
+                      <div class="form-row" *ngFor="let subject of subjects; let i = index">
                         <label for="{{subject}}">{{subject}}:</label>
-                        <input type="text" [id]="subject" [name]="subject" placeholder="Enter Faculty Name" (input)="onInputChanged($event)">
+                        <ng-autocomplete
+                            [(ngModel)]="selectedFaculty[i]"
+                            [ngModelOptions]="{ standalone: true }"
+                            [itemTemplate]="itemTemplate"
+                            [data]="faculty"
+                            placeholder="Enter Faculty Name"
+                            (inputChanged)="onChangeSearch($event)"
+                            (selected)="onFacultySelected($event,i)">
+                            <ng-template #itemTemplate let-item>
+                              <a [innerHTML]="item"></a>
+                            </ng-template>
+                        </ng-autocomplete> 
                       </div>
                     <div class="section-swipe">
                         <label for="section">Section:</label>
