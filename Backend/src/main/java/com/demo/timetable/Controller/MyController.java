@@ -7,6 +7,7 @@ import com.demo.timetable.Entity.Faculty;
 import com.demo.timetable.Service.CourseSemesterService;
 import com.demo.timetable.Service.CourseService;
 import com.demo.timetable.Service.FacultyService;
+import com.demo.timetable.Service.SectionService;
 import com.demo.timetable.Service.SubMappingService;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public class MyController {
     private SubMappingService subMappingService;
     @Autowired
     private FacultyService facultysService;
+    @Autowired
+    private SectionService sectionService;
 
     @GetMapping("welcome")
     public String printout()
@@ -60,6 +63,11 @@ public class MyController {
     @GetMapping("/name")
     public List<String> getFacultyNameByStartPattern(@RequestParam String name) {
         return facultysService.getFacultyNameByStartPattern(name);
+    }
+
+    @GetMapping("/section")
+    public Boolean setSection(@RequestParam String courseName,@RequestParam String semester,@RequestParam String secName) {
+        return sectionService.setSection(courseName,semester,secName);
     }
     
     

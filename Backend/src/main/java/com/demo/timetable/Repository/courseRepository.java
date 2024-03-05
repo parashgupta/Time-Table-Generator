@@ -11,5 +11,6 @@ public interface CourseRepository extends CrudRepository<Course,Integer>
 {
     @Query("SELECT cs.semester FROM CourseSemester cs JOIN Course c ON cs.cid_f = c.cid WHERE c.cname = :courseName")
     List<String> findSemByCourse(@Param("courseName") String courseName);
+
     
 }
