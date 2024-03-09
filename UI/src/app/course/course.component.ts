@@ -18,6 +18,7 @@ export class CourseComponent implements OnInit {
   additionalInfoDisplay: string = 'none';
   selectedCourse: string = '';
   selectedSemester: string = '';
+  selectedSection: string = '';
   selectedFaculty: string[] = [];
   isFormValid: boolean = false;
   subjects: string[] = [];
@@ -28,8 +29,19 @@ export class CourseComponent implements OnInit {
     response.subscribe((data) => this.courses = data);
   }
   
-  onSubmit(form: NgForm) {
-    
+  onSubmit(): void {
+    if(this.selectedSection!=='')
+    {
+      let response = this.semesterService.insertSectionName(this.selectedCourse, this.selectedSemester, this.selectedSection)
+      .subscribe(
+          (response) => {
+              console.log('Response:', response);
+          },
+          (error) => {
+              console.error('Error:', error);
+          }
+      );
+    }
   }
 
   toggleInputField() {
@@ -59,7 +71,7 @@ export class CourseComponent implements OnInit {
     this.semesterService.getSubjects(this.selectedCourse, this.selectedSemester).subscribe(
       (subjects: string[]) => {
         this.subjects = subjects;
-        console.log('Subjects:', this.subjects); // Log subjects to the console
+        // console.log('Subjects:', this.subjects); // Log subjects to the console
       },
       (error) => {
         console.error('Error fetching subjects:', error);
@@ -72,7 +84,7 @@ export class CourseComponent implements OnInit {
     this.semesterService.getFaculty(facultyName).subscribe(
       (data: string[]) => {
         this.faculty = data;
-        console.log('faculty:', this.faculty);
+        // console.log('faculty:', this.faculty); // Log Faculty to the console
       },
       (error) => {
         console.error('Error fetching faculty:', error);

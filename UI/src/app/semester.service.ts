@@ -28,4 +28,10 @@ export class SemesterService {
     const url = `${this.baseUrl}/name?name=${facultyName}`;
     return this.http.get<string[]>(url);
   }
+
+  insertSectionName(courseName: string, selectedSemester: string, selectedSection: string): Observable<any>
+  {
+    const url = `${this.baseUrl}/section?courseName=${courseName}&semester=${selectedSemester}&secName=${selectedSection}`;
+    return this.http.get(url);
+  }
 }

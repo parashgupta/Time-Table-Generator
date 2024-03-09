@@ -1,6 +1,7 @@
 <!-- <img id="back" src="../../assets/image/Media.png" alt="background"> -->
-<div class="main-container">  
-<div class="container">
+<form id="additionalInfoForm">
+    <div class="main-container">  
+       <div class="container">
             <h2>Course and Semester Selection</h2>
             <!-- <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)"> -->
                 <div class="form-group">
@@ -20,7 +21,6 @@
                   </div>
             <!-- <div id="additionalInfo" class="additional-info"> -->
                 <div id="additionalInfo" class="additional-info" [style.display]="additionalInfoDisplay">
-                    <form id="additionalInfoForm">
                       <div class="form-row" *ngFor="let subject of subjects; let i = index">
                         <label for="{{subject}}">{{subject}}:</label>
                         <ng-autocomplete
@@ -42,10 +42,10 @@
                             <option value="no">No</option>
                             <option value="yes">Yes</option>
                         </select>
-                        <input type="text" id="inputField" placeholder="Enter something" style="display: none;">
-                    </div>
-                    <input type="submit" value="Submit">
-                </form>
+                        <input type="text" id="inputField" [(ngModel)]="selectedSection" [ngModelOptions]="{standalone: true}" placeholder="Enter Section Name" style="display: none;">
+                      </div>
+                    <input type="submit" value="Submit"(click)="onSubmit()">
             </div>
         </div>
       </div>  
+</form>

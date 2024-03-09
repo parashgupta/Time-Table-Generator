@@ -14,19 +14,19 @@ public class Subject {
     private String sname;
     private Boolean practical;
     private Integer credit_NP;
-    private Integer cr_id;
+    private Integer cr_id_f;
 
     public Subject()
     {
         super();
     }
-    public Subject(String sid,String sname,Boolean practical,Integer credit_NP,Integer cr_id)
+    public Subject(String sid,String sname,Boolean practical,Integer credit_NP,Integer cr_id_f)
     {
         this.sid=sid;
         this.sname=sname;
         this.practical=practical;
         this.credit_NP=credit_NP;
-        this.cr_id=cr_id;
+        this.cr_id_f=cr_id_f;
     }
 
     
@@ -90,15 +90,15 @@ public class Subject {
     /**
      * @return Integer return the cr_id
      */
-    public Integer getCr_id() {
-        return cr_id;
+    public Integer getCr_id_f() {
+        return cr_id_f;
     }
 
     /**
      * @param cr_id the cr_id to set
      */
-    public void setCr_id(Integer cr_id) {
-        this.cr_id = cr_id;
+    public void setCr_id(Integer cr_id_f) {
+        this.cr_id_f = cr_id_f;
     }
 
 }

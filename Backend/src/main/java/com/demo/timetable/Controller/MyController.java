@@ -59,7 +59,8 @@ public class MyController {
     public List<String> getSubjectByCourseAndSemester(@RequestParam(defaultValue = "defaultCourse") String courseName, @RequestParam String semester) {
         return subMappingService.getSubjectByCourseAndSemester(courseName,semester);
     }
-
+    
+    //faculty list by name
     @GetMapping("/name")
     public List<String> getFacultyNameByStartPattern(@RequestParam String name) {
         return facultysService.getFacultyNameByStartPattern(name);
