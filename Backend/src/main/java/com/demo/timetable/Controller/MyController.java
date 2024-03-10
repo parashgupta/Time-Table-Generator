@@ -3,8 +3,7 @@ package com.demo.timetable.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.timetable.Entity.Course;
-import com.demo.timetable.Entity.Faculty;
-import com.demo.timetable.Service.CourseSemesterService;
+import com.demo.timetable.Service.AllotmentService;
 import com.demo.timetable.Service.CourseService;
 import com.demo.timetable.Service.FacultyService;
 import com.demo.timetable.Service.SectionService;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 
 @RestController
@@ -34,6 +31,8 @@ public class MyController {
     private FacultyService facultysService;
     @Autowired
     private SectionService sectionService;
+    @Autowired
+    private AllotmentService allotmentService;
 
     @GetMapping("welcome")
     public String printout()
@@ -71,5 +70,10 @@ public class MyController {
         return sectionService.setSection(courseName,semester,secName);
     }
     
+    @GetMapping("/allotment")
+    public Boolean allotFaculty(@RequestParam String courseName, @RequestParam String semester, @RequestParam String subject, @RequestParam String faculty) {        
+    return allotmentService.allotFaculty(courseName, semester, subject, faculty);
+}
+
     
 }

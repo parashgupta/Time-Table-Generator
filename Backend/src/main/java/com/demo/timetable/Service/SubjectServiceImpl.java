@@ -10,5 +10,10 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Autowired
     private SubjectRepository subjectRepo;
+
+    @Override
+    public String getSidBySubject(String subject) {
+        return subjectRepo.findSidBySubject(subject);
+    }
     
 }

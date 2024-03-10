@@ -18,5 +18,11 @@ public class FacultyServiceImpl implements FacultyService {
         return facultyRepo.findFacultyNameByStartPattern(name);
     }
 
+    @Override
+    public String getfidByFaculty(String facultyName) {
+        // TODO Auto-generated method stub
+        return facultyRepo.findFidByFacultyName(facultyName);
+    }
+
     
 }

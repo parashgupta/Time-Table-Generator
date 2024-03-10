@@ -4,4 +4,6 @@ import java.util.List;
 
 public interface FacultyService {
         public List<String> getFacultyNameByStartPattern(String name);
+        public String getfidByFaculty(String facultyName);
+
 }

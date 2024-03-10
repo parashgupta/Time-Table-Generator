@@ -42,6 +42,7 @@ export class CourseComponent implements OnInit {
           }
       );
     }
+    
   }
 
   toggleInputField() {

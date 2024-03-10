@@ -12,4 +12,7 @@ public interface FacultyRepository extends CrudRepository<Faculty,String>{
 
     @Query("SELECT f.fname FROM Faculty f WHERE f.fname LIKE %:name%")
     List<String> findFacultyNameByStartPattern(@Param(value = "name") String name);
+
+    @Query("SELECT f.fid  FROM Faculty f WHERE f.fname= :facultyName")
+    String findFidByFacultyName(@Param("facultyName") String facultyName);
 }

@@ -30,7 +30,6 @@ public class SectionServiceImpl implements SectionService {
         Integer csId=courseSemesterService.getCourseSemesterId(courseName,semester);
         insertSectionName(secName, csId);
         courseSemesterService.updateSection(csId);
-        System.out.println("I am a leader"+csId);
         return true;
     }
 
