@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { SemesterService } from '../semester.service';
 import { NgForm } from '@angular/forms';
+import { forkJoin } from 'rxjs';
+
 
 
 @Component({
@@ -22,7 +24,7 @@ export class CourseComponent implements OnInit {
   selectedFaculty: string[] = [];
   isFormValid: boolean = false;
   subjects: string[] = [];
-  faculty: string[] = [];
+  facultylist: string[] = [];
 
   ngOnInit(): void {
     let response = this.http.get("http://localhost:8080/course");
@@ -30,19 +32,32 @@ export class CourseComponent implements OnInit {
   }
   
   onSubmit(): void {
-    if(this.selectedSection!=='')
-    {
-      let response = this.semesterService.insertSectionName(this.selectedCourse, this.selectedSemester, this.selectedSection)
-      .subscribe(
-          (response) => {
-              console.log('Response:', response);
-          },
-          (error) => {
-              console.error('Error:', error);
-          }
+    console.log('Submit button clicked');
+  
+    const requests = [];
+  
+    if (this.selectedSection !== '') {
+      console.log('Inserting section name:', this.selectedSection);
+      requests.push(
+        this.semesterService.insertSectionName(this.selectedCourse, this.selectedSemester, this.selectedSection)
       );
     }
-    
+  
+    for (let i = 0; i < this.semesters.length; i++) {
+      console.log(`Allotting faculty for subject ${this.subjects[i]} and faculty ${this.selectedFaculty[i]}`);
+      requests.push(
+        this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester, this.subjects[i], this.selectedFaculty[i])
+      );
+    }
+  
+    forkJoin(requests).subscribe(
+      (responses) => {
+        console.log('All requests completed:', responses);
+      },
+      (error) => {
+        console.error('Error during requests:', error);
+      }
+    );
   }
 
   toggleInputField() {
@@ -84,7 +99,7 @@ export class CourseComponent implements OnInit {
   onChangeSearch(facultyName: string) {
     this.semesterService.getFaculty(facultyName).subscribe(
       (data: string[]) => {
-        this.faculty = data;
+        this.facultylist = data;
         // console.log('faculty:', this.faculty); // Log Faculty to the console
       },
       (error) => {

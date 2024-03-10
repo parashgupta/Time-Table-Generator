@@ -27,7 +27,7 @@
                             [(ngModel)]="selectedFaculty[i]"
                             [ngModelOptions]="{ standalone: true }"
                             [itemTemplate]="itemTemplate"
-                            [data]="faculty"
+                            [data]="facultylist"
                             placeholder="Enter Faculty Name"
                             (inputChanged)="onChangeSearch($event)"
                             (selected)="onFacultySelected($event,i)">
