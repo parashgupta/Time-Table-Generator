@@ -80,6 +80,6 @@ public class MyController {
 
 @GetMapping("/download")
     public void downloadExcel(@RequestParam String courseName, @RequestParam String semester) {        
-    return courseTableService.downloadExcel(courseName, semester);
-    
+     courseTableService.downloadExcel(courseName, semester);    
+}
 }
