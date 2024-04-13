@@ -46,4 +46,10 @@ export class SemesterService {
     const url = `${this.baseUrl}/checksection?courseName=${courseName}&semester=${selectedSemester}`;
     return this.http.get(url);
   }
+
+  allsection(): Observable<any>
+  {
+    const url = `${this.baseUrl}/allsection`;
+    return this.http.get(url);
+  }
 }

@@ -43,7 +43,7 @@ export class CourseComponent implements OnInit {
       );
     }
   
-    for (let i = 0; i < this.semesters.length; i++) {
+    for (let i = 0; i < this.subjects.length; i++) {
       console.log(`Allotting faculty for subject ${this.subjects[i]} and faculty ${this.selectedFaculty[i]}`);
       requests.push(
         this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester, this.subjects[i], this.selectedFaculty[i])

@@ -17,7 +17,17 @@
                       <option *ngFor="let semester of semesters">{{semester}}</option>
                     </select>
                   </div>
+
+                  <div class="form-group" [style.display]="additionalInfoDisplay">
+                    <label for="section">Select Section:</label>
+                    <select id="section" name="section" [(ngModel)]="selectedSection" required>
+                      <option value="" disabled selected>Select Section</option>
+                      <option *ngFor="let section of sections" [value]="section.sec_name">{{section.sec_name}}</option>
+                    </select>
+                  </div>
         </div>
     </div>
 </form>
                   
+
+<!-- (change)="onSectionChange()" -->
