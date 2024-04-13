@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.demo.timetable.Entity.Course;
 import com.demo.timetable.Service.AllotmentService;
 import com.demo.timetable.Service.CourseService;
+import com.demo.timetable.Service.CourseTableService;
 import com.demo.timetable.Service.FacultyService;
 import com.demo.timetable.Service.SectionService;
 import com.demo.timetable.Service.SubMappingService;
@@ -33,6 +34,8 @@ public class MyController {
     private SectionService sectionService;
     @Autowired
     private AllotmentService allotmentService;
+    @Autowired
+    private CourseTableService courseTableService;
 
     @GetMapping("welcome")
     public String printout()
@@ -75,5 +78,8 @@ public class MyController {
     return allotmentService.allotFaculty(courseName, semester, subject, faculty);
 }
 
+@GetMapping("/download")
+    public void downloadExcel(@RequestParam String courseName, @RequestParam String semester) {        
+    return courseTableService.downloadExcel(courseName, semester);
     
 }
