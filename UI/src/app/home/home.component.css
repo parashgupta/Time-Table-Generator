@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Background color */
+    font-family: Arial, sans-serif; /* Use a common font */
+}
+
+.main-container {
+    background: url('../../assets/image/Media.png') center/cover no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.button-container {
+    text-align: center;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    font-size: 20px;
+    margin: 5px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.button-container button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Add a subtle animation for button hover */
+.button-container button:hover {
+    transform: translateY(-2px);
+}
+
+/* Add a slight border effect on hover */
+.button-container button:hover {
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: Add a gradient background to buttons */
+.button-container button {
+    background: linear-gradient(to right, #4CAF50, #45a049);
+}
