@@ -11,8 +11,16 @@ import java.sql.Statement;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.demo.timetable.Entity.CourseSemester;
+import com.demo.timetable.Repository.CourseSemesterRepository;
+@Service
 public class CourseTableServiceImpl implements CourseTableService{
 
+    // @Autowired
+    // private CourseSemesterRepository courseSemesterRepo;
 
 
     public void downloadExcel(String courseName,String semester){
@@ -53,5 +61,12 @@ public class CourseTableServiceImpl implements CourseTableService{
             e.printStackTrace();
         }
     }
+
+    // @Override
+    // public Iterable<CourseSemester> getTimeTable() {
+    //     // TODO Auto-generated method stub
+    //     return courseSemesterRepo.findAll();
+    // }
+    
     
 }
