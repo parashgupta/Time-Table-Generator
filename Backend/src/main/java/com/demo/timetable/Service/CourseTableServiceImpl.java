@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -15,12 +15,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.demo.timetable.Entity.CourseSemester;
+import com.demo.timetable.Entity.TimeTable;
 import com.demo.timetable.Repository.CourseSemesterRepository;
+import com.demo.timetable.Repository.CourseTableRespository;
+import com.demo.timetable.Repository.SectionRepository;
+import com.demo.timetable.Repository.TimeTableRepository;
+
+
 @Service
 public class CourseTableServiceImpl implements CourseTableService{
 
-    // @Autowired
-    // private CourseSemesterRepository courseSemesterRepo;
+@Autowired
+private CourseTableRespository courseTableRespository;
+@Autowired
+private CourseSemesterRepository courseSemesterRepository;
+@Autowired
+private SectionRepository sectionRepository;
+@Autowired
+private TimeTableRepository timeTableRepository;
 
 
     public void downloadExcel(String courseName,String semester){
@@ -62,11 +74,18 @@ public class CourseTableServiceImpl implements CourseTableService{
         }
     }
 
-    // @Override
-    // public Iterable<CourseSemester> getTimeTable() {
-    //     // TODO Auto-generated method stub
-    //     return courseSemesterRepo.findAll();
-    // }
+    @Override
+    public Iterable<CourseSemester> finalTimeTable(String courseName, String semester, String secName) {
+        
+        Integer csid_fk=courseSemesterRepository.findCourseSemesterId(courseName, semester);
+        Integer secid_fk=sectionRepository.findSectionId(secName);
+        Iterable<Integer> tableid_pk=courseTableRespository.findCourseTableId(csid_fk,secid_fk);
+        // return timeTableRepository.findAllById(tableid_pk);
+        return courseSemesterRepository.findAll();
+        
+    }
+
+   
     
     
 }

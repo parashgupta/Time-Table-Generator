@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.demo.timetable.Entity.Course;
 import com.demo.timetable.Entity.CourseSemester;
 import com.demo.timetable.Entity.Section;
+import com.demo.timetable.Entity.TimeTable;
 import com.demo.timetable.Service.AllotmentService;
 import com.demo.timetable.Service.CourseSemesterService;
 import com.demo.timetable.Service.CourseService;
@@ -98,8 +99,8 @@ public class MyController {
      courseTableService.downloadExcel(courseName, semester);  
 }
 
-// @GetMapping("/showtimetable")
-//     public List finalTimeTable(@RequestParam String courseName, @RequestParam String semester,@RequestParam String secName) {        
-//      return courseTableService.finalTimeTable(courseName, semester,secName);  
-// }
+@GetMapping("/showtimetable")
+    public Iterable<CourseSemester> finalTimeTable(@RequestParam String courseName, @RequestParam String semester,@RequestParam(value = "secName", required = false) String secName) {        
+     return courseTableService.finalTimeTable(courseName, semester,secName);  
+}
 }

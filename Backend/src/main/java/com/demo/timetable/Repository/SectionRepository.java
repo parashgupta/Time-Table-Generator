@@ -13,6 +13,9 @@ public interface SectionRepository extends CrudRepository<Section,Integer> {
     
     @Modifying
     @Query(value="INSERT into Section(sec_name,csid_f) values(:secName,:csid)",nativeQuery = true)
-    void setSectionName(@Param("secName") String secName,@Param("csid") Integer csid);
+    public void setSectionName(@Param("secName") String secName,@Param("csid") Integer csid);
+
+    @Query("SELECT sec_id from Section WHERE sec_name= :secName")
+    public Integer findSectionId(@Param("secName") String secName);
 
 }
