@@ -15,10 +15,12 @@ export class DownloadComponent implements OnInit {
   semesters: string[] = [];
   selectedCourse: string = '';
   selectedSemester: string = '';
+  selectedSection: string = '';
   isFormValid: boolean = false;
   additionalInfoDisplay: string = 'none';
   subjects: string[] = [];
-  section: boolean = false;
+  sections: any;
+  sectionvalue: boolean = false;
 
   ngOnInit(): void {
     let response = this.http.get("http://localhost:8080/course");
@@ -27,6 +29,7 @@ export class DownloadComponent implements OnInit {
 
   onCourseChange(): void {
     if (this.selectedCourse) {
+      this.additionalInfoDisplay = 'none';
       this.semesterService.getSemesters(this.selectedCourse).subscribe(
         (data) => {
           this.semesters = data;
@@ -41,18 +44,39 @@ export class DownloadComponent implements OnInit {
 
   onSemesterChange(): void {
     this.isFormValid = this.selectedCourse !== '' && this.selectedSemester !== '';
+    this.additionalInfoDisplay = 'none';
     if (this.isFormValid) {
-    this.additionalInfoDisplay = 'block';
     this.semesterService.checkSection(this.selectedCourse, this.selectedSemester).subscribe(
       (data) => {
-        this.section = data;
-        console.log(this.section);
+        this.sectionvalue = data;
+        console.log(this.sectionvalue);
+        if (this.sectionvalue) {
+          // If section is true, fetch all sections
+          this.additionalInfoDisplay = 'block';
+          this.semesterService.allsection().subscribe(
+            (sectiondata) => {
+              this.sections = sectiondata;
+              console.log(this.sections);
+            },
+            (error) => {
+              console.error('Error fetching all sections:', error);
+            }
+          );
+        }
       },
       (error) => {
-        console.error('Error fetching subjects:', error);
+        console.error('Error fetching checksection:', error);
       }
     );
     }
   }
+
+  onSectionChange(): void {
+    // this.isFormValid = this.selectedCourse !== '' && this.selectedSemester !== '';
+
+
+    
+  }
+
 
 }
