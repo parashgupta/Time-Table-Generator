@@ -14,4 +14,8 @@ export class HomeComponent implements OnInit {
   navigateToCourse() {
     this.router.navigate(['/course-semester']);
   }
+
+  navigateToDownload() {
+    this.router.navigate(['/download']);
+  }
 }

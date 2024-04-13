@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { CourseComponent } from './course/course.component';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { HomeComponent } from './home/home.component';
+import { DownloadComponent } from './download/download.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CourseComponent,
     HomeComponent,
+    DownloadComponent
   ],
   imports: [
     BrowserModule,
