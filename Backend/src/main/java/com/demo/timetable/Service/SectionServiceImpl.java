@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.demo.timetable.Entity.Section;
 import com.demo.timetable.Repository.SectionRepository;
 
 import jakarta.persistence.EntityManager;
@@ -38,6 +39,10 @@ public class SectionServiceImpl implements SectionService {
         // TODO Auto-generated method stub
         sectionRepo.setSectionName(secName,csid);
         
+    }
+    @Override
+    public Iterable<Section> getAllSection() {
+       return sectionRepo.findAll();
     }
 
     

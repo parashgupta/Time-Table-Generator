@@ -3,7 +3,10 @@ package com.demo.timetable.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.timetable.Entity.Course;
+import com.demo.timetable.Entity.CourseSemester;
+import com.demo.timetable.Entity.Section;
 import com.demo.timetable.Service.AllotmentService;
+import com.demo.timetable.Service.CourseSemesterService;
 import com.demo.timetable.Service.CourseService;
 import com.demo.timetable.Service.CourseTableService;
 import com.demo.timetable.Service.FacultyService;
@@ -36,6 +39,8 @@ public class MyController {
     private AllotmentService allotmentService;
     @Autowired
     private CourseTableService courseTableService;
+    @Autowired
+    private CourseSemesterService courseSemesterService;
 
     @GetMapping("welcome")
     public String printout()
@@ -48,7 +53,12 @@ public class MyController {
     public Iterable<Course> getAllCourse() {
         return courseService.getAllCourse();
     }
+    @GetMapping("/allsection")
+    public Iterable<Section> getAllSection() {
+        return sectionService.getAllSection();
+    }
     
+
     //get semester by course
     //http://localhost:8080/course/courseName?courseName=BCA
     @GetMapping("/courseName")
@@ -72,6 +82,11 @@ public class MyController {
     public Boolean setSection(@RequestParam String courseName,@RequestParam String semester,@RequestParam String secName) {
         return sectionService.setSection(courseName,semester,secName);
     }
+
+    @GetMapping("/checksection")
+    public Boolean checkSection(@RequestParam String courseName,@RequestParam String semester) {
+        return courseSemesterService.checkSection(courseName,semester);
+    }
     
     @GetMapping("/allotment")
     public Boolean allotFaculty(@RequestParam String courseName, @RequestParam String semester, @RequestParam String subject, @RequestParam String faculty) {        
@@ -80,6 +95,11 @@ public class MyController {
 
 @GetMapping("/download")
     public void downloadExcel(@RequestParam String courseName, @RequestParam String semester) {        
-     courseTableService.downloadExcel(courseName, semester);    
+     courseTableService.downloadExcel(courseName, semester);  
 }
+
+// @GetMapping("/showtimetable")
+//     public List finalTimeTable(@RequestParam String courseName, @RequestParam String semester,@RequestParam String secName) {        
+//      return courseTableService.finalTimeTable(courseName, semester,secName);  
+// }
 }

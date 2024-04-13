@@ -22,6 +22,13 @@ public class CourseSemesterServiceImpl implements CourseSemesterService {
         courseSemesterRepo.updateSectionTrue(csid);
     }
 
+    @Override
+    public Boolean checkSection(String coursename, String semester) {
+        // TODO Auto-generated method stub
+        Integer csid = courseSemesterRepo.findCourseSemesterId(coursename,semester);
+        return courseSemesterRepo.checkSection(csid);
+    }
+
    
     
 }

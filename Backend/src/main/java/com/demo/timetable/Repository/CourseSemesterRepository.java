@@ -6,6 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.demo.timetable.Entity.CourseSemester;
+import java.util.List;
+
 
 
 public interface CourseSemesterRepository extends CrudRepository<CourseSemester,Integer> {
@@ -17,4 +19,6 @@ public interface CourseSemesterRepository extends CrudRepository<CourseSemester,
     @Query("UPDATE CourseSemester SET section=true WHERE csid= :csid ")
     public void updateSectionTrue(@Param("csid") Integer csid);
 
+    @Query("SELECT section FROM CourseSemester WHERE csid=:csid")
+    public Boolean checkSection(@Param("csid") Integer csid);
 }
