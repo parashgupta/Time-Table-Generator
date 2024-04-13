@@ -18,6 +18,7 @@ export class DownloadComponent implements OnInit {
   isFormValid: boolean = false;
   additionalInfoDisplay: string = 'none';
   subjects: string[] = [];
+  section: boolean = false;
 
   ngOnInit(): void {
     let response = this.http.get("http://localhost:8080/course");
@@ -41,11 +42,11 @@ export class DownloadComponent implements OnInit {
   onSemesterChange(): void {
     this.isFormValid = this.selectedCourse !== '' && this.selectedSemester !== '';
     if (this.isFormValid) {
-    this.semesterService.getSubjects(this.selectedCourse, this.selectedSemester).subscribe(
-      (subjects: string[]) => {
-        this.subjects = subjects;
-        // console.log('Subjects:', this.subjects); // Log subjects to the console
-        // console.log("Inside onSemesterChange method");
+    this.additionalInfoDisplay = 'block';
+    this.semesterService.checkSection(this.selectedCourse, this.selectedSemester).subscribe(
+      (data) => {
+        this.section = data;
+        console.log(this.section);
       },
       (error) => {
         console.error('Error fetching subjects:', error);
