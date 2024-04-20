@@ -100,7 +100,12 @@ public class MyController {
 }
 
 @GetMapping("/showtimetable")
-    public Iterable<CourseSemester> finalTimeTable(@RequestParam String courseName, @RequestParam String semester,@RequestParam(value = "secName", required = false) String secName) {        
+    public Iterable<TimeTable> finalTimeTable(@RequestParam String courseName, @RequestParam String semester,@RequestParam(value = "secName", required = false) String secName) {        
      return courseTableService.finalTimeTable(courseName, semester,secName);  
+}
+
+@GetMapping("/test")
+public void setCourseTable(){    
+courseTableService.setCourseTable("MCA", "3rd sem" , "A");  
 }
 }

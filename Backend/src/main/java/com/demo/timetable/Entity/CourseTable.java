@@ -1,6 +1,8 @@
 package com.demo.timetable.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -9,6 +11,7 @@ import jakarta.persistence.Table;
 public class CourseTable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tableid_pk;
     private Integer csid_fk;
     private Integer secid_fk;

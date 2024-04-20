@@ -2,6 +2,6 @@ package com.demo.timetable.Service;
 
 public interface TimeTableService {
 
-    public void generateTimeTable();
+    public String generateTimeTables(Integer csid_fk);
 
 }

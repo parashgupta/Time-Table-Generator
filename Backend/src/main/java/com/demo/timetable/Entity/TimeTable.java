@@ -1,6 +1,8 @@
 package com.demo.timetable.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -8,6 +10,7 @@ import jakarta.persistence.Table;
 @Table(name="timetable")
 public class TimeTable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ttid_pk;
     private Integer tableid_fk;
     private String day;

@@ -11,4 +11,5 @@ public interface CourseTableRespository extends CrudRepository<CourseTable,Integ
 
     @Query("SELECT tableid_pk FROM CourseTable WHERE csid_fk= :csid_fk and secid_fk= :secid_fk")
     public Iterable<Integer> findCourseTableId(@Param("csid_fk") Integer csid_fk,@Param("secid_fk") Integer secid_fk);
+
 }

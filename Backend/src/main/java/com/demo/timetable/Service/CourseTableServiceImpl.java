@@ -11,19 +11,28 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.demo.timetable.Entity.CourseSemester;
+import com.demo.timetable.Entity.CourseTable;
 import com.demo.timetable.Entity.TimeTable;
 import com.demo.timetable.Repository.CourseSemesterRepository;
 import com.demo.timetable.Repository.CourseTableRespository;
 import com.demo.timetable.Repository.SectionRepository;
 import com.demo.timetable.Repository.TimeTableRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
 
 @Service
 public class CourseTableServiceImpl implements CourseTableService{
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
 @Autowired
 private CourseTableRespository courseTableRespository;
@@ -33,9 +42,12 @@ private CourseSemesterRepository courseSemesterRepository;
 private SectionRepository sectionRepository;
 @Autowired
 private TimeTableRepository timeTableRepository;
+@Autowired
+private TimeTableServiceImpl timeTableServiceImpl;
 
 
-    public void downloadExcel(String courseName,String semester){
+    public void downloadExcel(String courseName,String
+     semester){
         String jdbcUrl = "jdbc:mysql://localhost:3306/Timetable";
         String username = "root";
         String password = "boot@123";
@@ -75,15 +87,31 @@ private TimeTableRepository timeTableRepository;
     }
 
     @Override
-    public Iterable<CourseSemester> finalTimeTable(String courseName, String semester, String secName) {
+    public Iterable<TimeTable> finalTimeTable(String courseName, String semester, String secName) {
         
         Integer csid_fk=courseSemesterRepository.findCourseSemesterId(courseName, semester);
         Integer secid_fk=sectionRepository.findSectionId(secName);
         Iterable<Integer> tableid_pk=courseTableRespository.findCourseTableId(csid_fk,secid_fk);
-        // return timeTableRepository.findAllById(tableid_pk);
-        return courseSemesterRepository.findAll();
+        return timeTableRepository.findAllById(tableid_pk);
+        // return courseSemesterRepository.findAll();
         
     }
+
+    @Transactional
+    public void setCourseTable(String courseName, String semester, String secName)
+    {   
+        Integer csid_fk=courseSemesterRepository.findCourseSemesterId(courseName, semester);
+        Integer secid_fk=sectionRepository.findSectionId(secName);
+        CourseTable courseTable=new CourseTable();
+        courseTable.setCsid_fk(csid_fk);
+        courseTable.setSecid_fk(secid_fk);
+        entityManager.persist(courseTable); 
+        CourseTable ct=courseTableRespository.save(courseTable);
+        Integer tableid=ct.getTableid_pk();
+      
+        timeTableServiceImpl.generateTimeTables(tableid);
+    }   
+    
 
    
     

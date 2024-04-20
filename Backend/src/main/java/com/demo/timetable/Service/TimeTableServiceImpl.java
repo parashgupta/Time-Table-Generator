@@ -5,15 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.demo.timetable.Entity.TimeTable;
+import com.demo.timetable.Repository.TimeTableRepository;
+
+@Service
 public class TimeTableServiceImpl implements TimeTableService {
 
 
-    String[] day={"Monday","Tuesday","Wednusday","Thursday","Friday","Saturday"};
+    @Autowired
+    private TimeTableRepository timeTableRepository;
+  
+    String[] day={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
     
     Map<String,List<String>> monday=new HashMap<>();
     Map<String,List<String>> tuesday=new HashMap<>();
-    Map<String,List<String>> wednusday=new HashMap<>();
+    Map<String,List<String>> wednesday=new HashMap<>();
     Map<String,List<String>> thursday=new HashMap<>();
     Map<String,List<String>> friday=new HashMap<>();
     Map<String,List<String>> saturday=new HashMap<>();
@@ -45,7 +54,7 @@ public class TimeTableServiceImpl implements TimeTableService {
         wednusday1.add("W1");
         wednusday1.add("W2");
         wednusday1.add("W3");
-        wednusday.put("wednusday", wednusday1);
+        wednesday.put("wednusday", wednusday1);
 
         List<String> thursday1=new ArrayList<>();
         thursday1.add("TH10");
@@ -75,9 +84,23 @@ public class TimeTableServiceImpl implements TimeTableService {
         saturday.put("saturday", saturday1);
 
     }
-    public void generateTimeTable()
-    {
-
+   
+    public String generateTimeTables(Integer tableid) {
+       
+        String day1=day[0];
+       TimeTable timeTable=new TimeTable();
+       timeTable.setTableid_fk(tableid);
+       timeTable.setDay(day1);
+       timeTable.setTen("DBMS tarjani");
+       timeTable.setEleven("AUTOMATA chaitali mam");
+       timeTable.setTwelve("frevv");
+       timeTable.setOne("lunch time");
+       timeTable.setTwo("efrfregr");
+       timeTable.setThree("rgrtbr");
+       TimeTable timeTable2=timeTableRepository.save(timeTable);
+       System.out.println(timeTable2);
+       
+        return day1;
     }
 
 }
