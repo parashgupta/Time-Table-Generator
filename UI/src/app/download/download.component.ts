@@ -76,9 +76,11 @@ export class DownloadComponent implements OnInit {
   onSectionChange(): void {
     // this.isFormValid = this.selectedCourse !== '' && this.selectedSemester !== '';
     console.log("inside onSectionChange function");
-    this.semesterService.showtimetable(this.selectedCourse, this.selectedSemester).subscribe(
+    this.semesterService.showtimetable(this.selectedCourse, this.selectedSemester,this.selectedSection).subscribe(
       (data) => {
         this.timetable = data;
+        console.log(this.timetable);
+        console.log(this.selectedSection);
       },
       (error) => {
         console.error('Error fetching data:', error);

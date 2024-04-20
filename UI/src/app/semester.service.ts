@@ -53,9 +53,9 @@ export class SemesterService {
     return this.http.get(url);
   }
 
-  showtimetable(selectedCourse: string,selectedSemester: string)
+  showtimetable(selectedCourse: string,selectedSemester: string, selectedSection: string)
   {
-    const url = `${this.baseUrl}/showtimetable?courseName=${selectedCourse}&semester=${selectedSemester}`;
+    const url = `${this.baseUrl}/showtimetable?courseName=${selectedCourse}&semester=${selectedSemester}&secName=${selectedSection}`;
     return this.http.get<string[]>(url);
   }
 
