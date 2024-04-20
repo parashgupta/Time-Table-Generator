@@ -14,7 +14,7 @@ body {
     border-radius: 10px;
     padding: 20px;
     width: 80%; /* Adjust the width as needed */
-    max-width: 700px; /* Optional: Set a maximum width for larger screens */
+    max-width: 800px; /* Optional: Set a maximum width for larger screens */
     max-height: 90vh; /* Adjust the max-height as needed */
     overflow-y: auto; /* Enable vertical scrolling when content exceeds max-height */
     text-align: start;
@@ -77,3 +77,21 @@ body {
   }
   
  
+
+  .timetable table {
+    border-collapse: separate;
+    border-spacing: 10px; /* Adjust this value as needed */
+  }
+  
+  /* .timetable th {
+    padding: 10px; 
+  } */
+  
+  .day-column {
+    width: 100px; /* Adjust the width as needed */
+  }
+  
+  .time-column {
+    width: 120px; /* Adjust the width as needed */
+  }
+  
