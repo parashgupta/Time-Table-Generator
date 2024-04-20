@@ -52,4 +52,11 @@ export class SemesterService {
     const url = `${this.baseUrl}/allsection`;
     return this.http.get(url);
   }
+
+  showtimetable(selectedCourse: string,selectedSemester: string)
+  {
+    const url = `${this.baseUrl}/showtimetable?courseName=${selectedCourse}&semester=${selectedSemester}`;
+    return this.http.get<string[]>(url);
+  }
+
 }

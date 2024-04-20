@@ -21,7 +21,9 @@ export class DownloadComponent implements OnInit {
   subjects: string[] = [];
   sections: any;
   sectionvalue: boolean = false;
-
+  days: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  timetable: any;
+  
   ngOnInit(): void {
     let response = this.http.get("http://localhost:8080/course");
     response.subscribe((data) => this.courses = data);
@@ -73,9 +75,16 @@ export class DownloadComponent implements OnInit {
 
   onSectionChange(): void {
     // this.isFormValid = this.selectedCourse !== '' && this.selectedSemester !== '';
-
-
-    
+    console.log("inside onSectionChange function");
+    this.semesterService.showtimetable(this.selectedCourse, this.selectedSemester).subscribe(
+      (data) => {
+        this.timetable = data;
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+    console.log("onSectionChange completed");
   }
 
 

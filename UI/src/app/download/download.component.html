@@ -20,7 +20,7 @@
 
                   <div class="form-group" [style.display]="additionalInfoDisplay">
                     <label for="section">Select Section:</label>
-                    <select id="section" name="section" [(ngModel)]="selectedSection" required>
+                    <select id="section" name="section" [(ngModel)]="selectedSection" (change)="onSectionChange()" required>
                       <option value="" disabled selected>Select Section</option>
                       <option *ngFor="let section of sections" [value]="section.sec_name">{{section.sec_name}}</option>
                     </select>
@@ -39,8 +39,19 @@
                           <th class="time-column">02:00-03:00</th>
                         </tr>
                       </thead>
+                      <tbody>
+                        <!-- Loop through the days array to generate rows -->
+                        <tr *ngFor="let dataItem of timetable">
+                          <!-- <td class="day-column">{{ day }}</td> -->
+                          <td class="csid-column">{{ dataItem.csid }}</td>
+                          <td class="cid_f-column">{{ dataItem.cid_f }}</td>
+                          <td class="semester-column">{{ dataItem.semester }}</td>
+                          <td class="section-column">{{ dataItem.section }}</td>
+                        </tr>
+                      </tbody>
                     </table>
                   </div>                  
+                  
                   
                   
         </div>
