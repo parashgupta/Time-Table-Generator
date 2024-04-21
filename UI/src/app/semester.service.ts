@@ -37,7 +37,8 @@ export class SemesterService {
 
   allotFaculty(courseName: string, selectedSemester: string, subject: string, faculty: string): Observable<any>
   {
-    const url = `${this.baseUrl}/allotment?courseName=${courseName}&semester=${selectedSemester}&subject=${subject}&faculty=${faculty}`;
+    const encodedSubject = encodeURIComponent(subject);
+    const url = `${this.baseUrl}/allotment?courseName=${courseName}&semester=${selectedSemester}&subject=${encodedSubject}&faculty=${faculty}`;
     return this.http.get(url);
   }
 

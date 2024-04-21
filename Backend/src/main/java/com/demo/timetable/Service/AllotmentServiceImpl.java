@@ -27,11 +27,9 @@ public class AllotmentServiceImpl implements AllotmentService {
         Integer csid_fk=courseSemesterService.getCourseSemesterId(courseName,semester);
         String sid_fk =subjectService.getSidBySubject(subject);
         String fid_fk = facultyService.getfidByFaculty(faculty);
-        
-      
-         
-        // System.out.println("I am the leader and this is my csId "+csid_fk);
-        // System.out.println("I am the leader and this is my sid "+sid_fk);
+        System.out.println(courseName+"-------------> "+semester+"-------------> "+csid_fk);
+        System.out.println(subject+"-------------> "+sid_fk);
+        System.out.println(faculty+"-------------> "+fid_fk);
         // System.out.println("I am the leader and this is my fid "+fid_fk);
         allotmentRepo.allotFacultyToSubject(fid_fk,sid_fk,csid_fk);
 
