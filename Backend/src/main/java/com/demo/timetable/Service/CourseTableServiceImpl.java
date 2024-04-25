@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -31,8 +33,6 @@ import jakarta.transaction.Transactional;
 @Service
 public class CourseTableServiceImpl implements CourseTableService{
 
-    @PersistenceContext
-    private EntityManager entityManager;
 
 @Autowired
 private CourseTableRespository courseTableRespository;
@@ -46,8 +46,7 @@ private TimeTableRepository timeTableRepository;
 private TimeTableServiceImpl timeTableServiceImpl;
 
 
-    public void downloadExcel(String courseName,String
-     semester){
+    public void downloadExcel(String courseName, String semester, String secName){
         String jdbcUrl = "jdbc:mysql://localhost:3306/Timetable";
         String username = "root";
         String password = "boot@123";
@@ -97,19 +96,17 @@ private TimeTableServiceImpl timeTableServiceImpl;
         
     }
 
-    @Transactional
-    public void setCourseTable(String courseName, String semester, String secName)
+    public void setCourseTable(String courseName, String semester, String secName,Map<String,String> subjectWithFaculty)
     {   
         Integer csid_fk=courseSemesterRepository.findCourseSemesterId(courseName, semester);
         Integer secid_fk=sectionRepository.findSectionId(secName);
         CourseTable courseTable=new CourseTable();
         courseTable.setCsid_fk(csid_fk);
         courseTable.setSecid_fk(secid_fk);
-        entityManager.persist(courseTable); 
         CourseTable ct=courseTableRespository.save(courseTable);
         Integer tableid=ct.getTableid_pk();
       
-        timeTableServiceImpl.generateTimeTables(tableid);
+        timeTableServiceImpl.generateTimeTables(tableid,subjectWithFaculty,csid_fk);
     }   
     
 

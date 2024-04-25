@@ -14,7 +14,9 @@ import com.demo.timetable.Service.FacultyService;
 import com.demo.timetable.Service.SectionService;
 import com.demo.timetable.Service.SubMappingService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -95,8 +97,8 @@ public class MyController {
 }
 
 @GetMapping("/download")
-    public void downloadExcel(@RequestParam String courseName, @RequestParam String semester) {        
-     courseTableService.downloadExcel(courseName, semester);  
+    public void downloadExcel(@RequestParam String courseName, @RequestParam String semester,@RequestParam(value = "secName", required = false) String secName) {        
+     courseTableService.downloadExcel(courseName, semester,secName);  
 }
 
 @GetMapping("/showtimetable")
@@ -106,6 +108,12 @@ public class MyController {
 
 @GetMapping("/test")
 public void setCourseTable(){    
-courseTableService.setCourseTable("MCA", "3rd sem" , "A");  
+    Map<String,String> allot=new HashMap<>();
+    allot.put("Automata Theory and Compiler Construction","chaitali");
+    allot.put("Cloud Computing","nitin");
+    allot.put("Artificial Intelligence and Machine Learning","deepak");
+    allot.put("Information Security","ajay");
+    allot.put("Internet of Things", "preeti");
+courseTableService.setCourseTable("MCA", "3rd sem" , "A",allot);  
 }
 }

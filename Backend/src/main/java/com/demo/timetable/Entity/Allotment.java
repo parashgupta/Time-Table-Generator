@@ -1,6 +1,8 @@
 package com.demo.timetable.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -9,22 +11,25 @@ import jakarta.persistence.Table;
 public class Allotment {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer al_id;
     private String fid_fk;
     private String sid_fk;
     private Integer csid_fk;
+    private String time;
 
     public Allotment()
     {
         super();
 
     }
-    public Allotment(Integer al_id,String fid_fk,String sid_fk,Integer csid_fk)
+    public Allotment(Integer al_id,String fid_fk,String sid_fk,Integer csid_fk,String time)
     {
         this.al_id=al_id;
         this.fid_fk=fid_fk;
         this.sid_fk=sid_fk;
         this.csid_fk=csid_fk;
+        this.time=time;
     }
 
     
@@ -83,6 +88,21 @@ public class Allotment {
      */
     public void setCsid_fk(Integer csid_fk) {
         this.csid_fk = csid_fk;
+    }
+
+
+    /**
+     * @return String return the time
+     */
+    public String getTime() {
+        return time;
+    }
+
+    /**
+     * @param time the time to set
+     */
+    public void setTime(String time) {
+        this.time = time;
     }
 
 }
