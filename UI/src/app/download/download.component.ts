@@ -56,7 +56,7 @@ export class DownloadComponent implements OnInit {
         if (this.sectionvalue) {
           // If section is true, fetch all sections
           this.additionalInfoDisplay = 'block';
-          this.semesterService.allsection().subscribe(
+          this.semesterService.allsection(this.selectedCourse,this.selectedSemester).subscribe(
             (sectiondata) => {
               this.sections = sectiondata;
               console.log(this.sections);

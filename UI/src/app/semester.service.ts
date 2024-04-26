@@ -58,9 +58,9 @@ export class SemesterService {
     return this.http.get(url);
   }
 
-  allsection(): Observable<any>
+  allsection(courseName: string, selectedSemester: string): Observable<any>
   {
-    const url = `${this.baseUrl}/allsection`;
+    const url = `${this.baseUrl}/allsection?courseName=${courseName}&semester=${selectedSemester}`;
     return this.http.get(url);
   }
 
