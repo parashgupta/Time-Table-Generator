@@ -35,11 +35,20 @@ export class SemesterService {
     return this.http.get(url);
   }
 
-  allotFaculty(courseName: string, selectedSemester: string, subject: string, faculty: string): Observable<any>
-  {
-    const encodedSubject = encodeURIComponent(subject);
-    const url = `${this.baseUrl}/allotment?courseName=${courseName}&semester=${selectedSemester}&subject=${encodedSubject}&faculty=${faculty}`;
-    return this.http.get(url);
+  allotFaculty(courseName: string, selectedSemester: string, dataMap: Map<string, string>): Observable<any> {
+    const url = 'http://localhost:8080/course/test';
+
+    // Convert Map to plain JavaScript object
+    const dataObject: { [key: string]: string } = {};
+    dataMap.forEach((value, key) => {
+      dataObject[key] = value;
+    });
+
+    return this.http.post(url, {
+      courseName: courseName,
+      semester: selectedSemester,
+      subjectWithFaculty: dataObject
+    });
   }
 
   checkSection(courseName: string, selectedSemester: string): Observable<any>

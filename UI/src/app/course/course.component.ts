@@ -43,12 +43,31 @@ export class CourseComponent implements OnInit {
       );
     }
   
-    for (let i = 0; i < this.subjects.length; i++) {
-      console.log(`Allotting faculty for subject ${this.subjects[i]} and faculty ${this.selectedFaculty[i]}`);
-      requests.push(
-        this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester, this.subjects[i], this.selectedFaculty[i])
-      );
-    }
+    // for (let i = 0; i < this.subjects.length; i++) {
+    //   console.log(`Allotting faculty for subject ${this.subjects[i]} and faculty ${this.selectedFaculty[i]}`);
+    //   requests.push(
+    //     this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester, this.subjects[i], this.selectedFaculty[i])
+    //   );
+    // }
+  
+    // forkJoin(requests).subscribe(
+    //   (responses) => {
+    //     console.log('All requests completed:', responses);
+    //   },
+    //   (error) => {
+    //     console.error('Error during requests:', error);
+    //   }
+    // );
+
+    const dataMap = new Map<string, string>();
+    this.subjects.forEach((subject, index) => {
+        dataMap.set(subject, this.selectedFaculty[index]);
+    });
+    console.log(dataMap);
+
+    requests.push(
+      this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester, dataMap)
+    );
   
     forkJoin(requests).subscribe(
       (responses) => {
@@ -58,6 +77,7 @@ export class CourseComponent implements OnInit {
         console.error('Error during requests:', error);
       }
     );
+
   }
 
   toggleInputField() {

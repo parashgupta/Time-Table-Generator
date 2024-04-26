@@ -21,6 +21,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -106,8 +108,28 @@ public class MyController {
      return courseTableService.finalTimeTable(courseName, semester,secName);  
 }
 
-@GetMapping("/test")
-public void setCourseTable(){    
+@PostMapping("/test")
+public void setCourseTable(@RequestBody Map<String, Object> subjectWithFaculty) {
+
+    try {
+        System.out.println("Received request with data =============> " + subjectWithFaculty);
+        String courseName = (String) subjectWithFaculty.get("courseName");
+        String semester = (String) subjectWithFaculty.get("semester");
+        Map<String, Object> data = (Map<String, Object>) subjectWithFaculty.get("subjectWithFaculty");
+
+        // Now you can use courseName, semester, and subjectWithFaculty as needed
+        System.out.println("Course Name: " + courseName);
+        System.out.println("Semester: " + semester);
+        System.out.println("Subject with Faculty:");
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+            System.out.println("Subject: " + entry.getKey() + ", Faculty: " + entry.getValue());
+        }
+        
+    } catch (Exception e) {
+        System.err.println("Error processing request: " + e.getMessage());
+        e.printStackTrace();
+    }
+
     Map<String,String> allot=new HashMap<>();
     allot.put("Automata Theory and Compiler Construction","chaitali");
     allot.put("Cloud Computing","nitin");
