@@ -59,8 +59,8 @@ public class MyController {
         return courseService.getAllCourse();
     }
     @GetMapping("/allsection")
-    public Iterable<Section> getAllSection() {
-        return sectionService.getAllSection();
+    public Iterable<Section> getAllSection(@RequestParam String courseName,@RequestParam String semester) {
+        return sectionService.getAllSection(courseName,semester);
     }
     
 
@@ -99,8 +99,8 @@ public class MyController {
 }
 
 @GetMapping("/download")
-    public void downloadExcel(@RequestParam String courseName, @RequestParam String semester,@RequestParam(value = "secName", required = false) String secName) {        
-     courseTableService.downloadExcel(courseName, semester,secName);  
+    public Boolean downloadExcel(@RequestParam String courseName, @RequestParam String semester,@RequestParam(value = "secName", required = false) String secName) {        
+    return courseTableService.downloadExcel(courseName, semester,secName);  
 }
 
 @GetMapping("/showtimetable")

@@ -22,4 +22,6 @@ public interface CourseSemesterRepository extends CrudRepository<CourseSemester,
 
     @Query("SELECT section FROM CourseSemester WHERE csid=:csid")
     public Boolean checkSection(@Param("csid") Integer csid);
+
+   
 }

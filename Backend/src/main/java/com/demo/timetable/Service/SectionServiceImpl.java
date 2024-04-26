@@ -22,27 +22,30 @@ public class SectionServiceImpl implements SectionService {
     // @Autowired
     // private CourseService courseService;
 
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Transactional
     @Override
     public Boolean setSection(String courseName,String semester,String secName){
+        System.out.println("=====================>"+courseName);
+        System.out.println("=====================>"+semester);
+        System.out.println("=====================>"+secName);
+        
         Integer csId=courseSemesterService.getCourseSemesterId(courseName,semester);
-        insertSectionName(secName, csId);
+        System.out.println("=====================>"+csId);
+
+        Section section=new Section();
+        section.setCsid_f(csId);
+        section.setSec_name(secName);
+        Section section2=sectionRepo.save(section);
+        System.out.println(section2);
         courseSemesterService.updateSection(csId);
         return true;
     }
 
     @Override
-    public void insertSectionName(String secName, Integer csid) {
-        // TODO Auto-generated method stub
-        sectionRepo.setSectionName(secName,csid);
-        
-    }
-    @Override
-    public Iterable<Section> getAllSection() {
-       return sectionRepo.findAll();
+    public Iterable<Section> getAllSection(String course,String semester) {
+        Integer csId=courseSemesterService.getCourseSemesterId(course,semester);
+        return sectionRepo.findSection(csId);
     }
 
     

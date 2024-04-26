@@ -46,14 +46,14 @@ private TimeTableRepository timeTableRepository;
 private TimeTableServiceImpl timeTableServiceImpl;
 
 
-    public void downloadExcel(String courseName, String semester, String secName){
+    public Boolean downloadExcel(String courseName, String semester, String secName){
         String jdbcUrl = "jdbc:mysql://localhost:3306/Timetable";
         String username = "root";
         String password = "boot@123";
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("select c.cname,s.sname,cs.semester from course c inner join course_semester cs on c.cid=cs.cid_f inner join sub_mapping sm on sm.csid_f=cs.csid inner join subject s on s.sid=sm.sid_f ");
+             ResultSet resultSet = statement.executeQuery("SELECT day as DAY,ten as '10:00 to 11:00',eleven as '11:00 to 12:00',twelve as '12:00 to 1:00',one as '1:00 to 2:00',two as '2:00 to 3:00',three as '3:00 to 4:00' FROM TimeTable WHERE tableid_fk = :tableid_fk ");
              FileOutputStream fileOut = new FileOutputStream("output.xlsx")) {
 
             XSSFWorkbook workbook = new XSSFWorkbook();
@@ -79,28 +79,44 @@ private TimeTableServiceImpl timeTableServiceImpl;
 
             workbook.write(fileOut);
             System.out.println("Data exported to Excel successfully.");
+            
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     @Override
     public Iterable<TimeTable> finalTimeTable(String courseName, String semester, String secName) {
         
         Integer csid_fk=courseSemesterRepository.findCourseSemesterId(courseName, semester);
-        Integer secid_fk=sectionRepository.findSectionId(secName);
+        System.out.println("csid------------>"+csid_fk);
+        Boolean secCheck=courseSemesterRepository.checkSection(csid_fk);
+        Integer secid_fk=null;
+        if(secCheck)
+        {
+            secid_fk=sectionRepository.findSectionId(secName,csid_fk);
+        }
+        System.out.println("secid----------->"+secid_fk);
         Integer tableid_pk=courseTableRespository.findCourseTableId(csid_fk,secid_fk);
         System.out.println("==============================================>"+tableid_pk);
         return timeTableRepository.findAllByTableId(tableid_pk);
         // return courseSemesterRepository.findAll();
         
     }
-
+    @Override
     public void setCourseTable(String courseName, String semester, String secName,Map<String,String> subjectWithFaculty)
     {   
+        System.out.println("=====================>"+courseName);
+        System.out.println("=====================>"+semester);
+        System.out.println("=====================>"+secName);
         Integer csid_fk=courseSemesterRepository.findCourseSemesterId(courseName, semester);
-        Integer secid_fk=sectionRepository.findSectionId(secName);
+        System.out.println("csid=====================>"+csid_fk);
+
+        Integer secid_fk=sectionRepository.findSectionId(secName,csid_fk);
+        System.out.println("secid_fk=====================>"+secid_fk);
+
         CourseTable courseTable=new CourseTable();
         courseTable.setCsid_fk(csid_fk);
         courseTable.setSecid_fk(secid_fk);

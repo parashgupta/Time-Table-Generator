@@ -12,12 +12,11 @@ import com.demo.timetable.Entity.Section;
 @Repository
 public interface SectionRepository extends CrudRepository<Section,Integer> {
 
-    
-    @Modifying
-    @Query(value="INSERT into Section(sec_name,csid_f) values(:secName,:csid)",nativeQuery = true)
-    public void setSectionName(@Param("secName") String secName,@Param("csid") Integer csid);
 
-    @Query("SELECT sec_id from Section WHERE sec_name= :secName")
-    public Integer findSectionId(@Param("secName") String secName);
+    @Query("SELECT sec_id from Section WHERE sec_name= :secName and csid_f = :csid_f")
+    public Integer findSectionId(@Param("secName") String secName,@Param("csid_f") Integer csid_f);
+
+    @Query("SELECT sec_name FROM Section WHERE csid_f = :csid_f")
+    public Iterable<Section> findSection(@Param("csid_f") Integer csid_f);
 
 }

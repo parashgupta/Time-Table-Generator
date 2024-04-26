@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.demo.timetable.Entity.CourseTable;
+import com.demo.timetable.Entity.TimeTable;
 @Repository
 public interface CourseTableRespository extends CrudRepository<CourseTable,Integer>{
 
