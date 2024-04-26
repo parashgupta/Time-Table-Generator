@@ -8,13 +8,15 @@ import { CourseComponent } from './course/course.component';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { HomeComponent } from './home/home.component';
 import { DownloadComponent } from './download/download.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CourseComponent,
     HomeComponent,
-    DownloadComponent
+    DownloadComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
