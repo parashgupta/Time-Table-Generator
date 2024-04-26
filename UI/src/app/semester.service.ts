@@ -35,7 +35,7 @@ export class SemesterService {
     return this.http.get(url);
   }
 
-  allotFaculty(courseName: string, selectedSemester: string, dataMap: Map<string, string>): Observable<any> {
+  allotFaculty(courseName: string, selectedSemester: string, selectedSection: string,  dataMap: Map<string, string>): Observable<any> {
     const url = 'http://localhost:8080/course/test';
 
     // Convert Map to plain JavaScript object
@@ -47,6 +47,7 @@ export class SemesterService {
     return this.http.post(url, {
       courseName: courseName,
       semester: selectedSemester,
+      section: selectedSection,
       subjectWithFaculty: dataObject
     });
   }

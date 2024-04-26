@@ -115,11 +115,13 @@ public void setCourseTable(@RequestBody Map<String, Object> subjectWithFaculty) 
         System.out.println("Received request with data =============> " + subjectWithFaculty);
         String courseName = (String) subjectWithFaculty.get("courseName");
         String semester = (String) subjectWithFaculty.get("semester");
+        String section = (String) subjectWithFaculty.get("section");
         Map<String, Object> data = (Map<String, Object>) subjectWithFaculty.get("subjectWithFaculty");
 
         // Now you can use courseName, semester, and subjectWithFaculty as needed
         System.out.println("Course Name: " + courseName);
         System.out.println("Semester: " + semester);
+        System.out.println("section: " + section);
         System.out.println("Subject with Faculty:");
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             System.out.println("Subject: " + entry.getKey() + ", Faculty: " + entry.getValue());
@@ -136,6 +138,6 @@ public void setCourseTable(@RequestBody Map<String, Object> subjectWithFaculty) 
     allot.put("Artificial Intelligence and Machine Learning","deepak");
     allot.put("Information Security","ajay");
     allot.put("Internet of Things", "preeti");
-courseTableService.setCourseTable("MCA", "3rd sem" , "A",allot);  
+    courseTableService.setCourseTable("MCA", "3rd sem" , "A",allot);  
 }
 }

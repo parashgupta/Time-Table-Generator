@@ -66,7 +66,7 @@ export class CourseComponent implements OnInit {
     console.log(dataMap);
 
     requests.push(
-      this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester, dataMap)
+      this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester,this.selectedSection, dataMap)
     );
   
     forkJoin(requests).subscribe(
