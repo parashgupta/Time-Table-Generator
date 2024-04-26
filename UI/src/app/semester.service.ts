@@ -70,4 +70,10 @@ export class SemesterService {
     return this.http.get<string[]>(url);
   }
 
+  downloadtimetable(courseName: string, selectedSemester: string, selectedSection: string): Observable<any>
+  {
+    const url = `${this.baseUrl}/download?courseName=${courseName}&semester=${selectedSemester}&secName=${selectedSection}`;
+    return this.http.get(url);
+  }
+
 }

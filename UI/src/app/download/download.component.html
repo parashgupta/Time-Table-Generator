@@ -22,7 +22,7 @@
                     <label for="section">Select Section:</label>
                     <select id="section" name="section" [(ngModel)]="selectedSection" (change)="onSectionChange()" required>
                       <option value="" disabled selected>Select Section</option>
-                      <option *ngFor="let section of sections" [value]="section.sec_name">{{section.sec_name}}</option>
+                      <option *ngFor="let section of sections" >{{section}}</option>
                     </select>
                   </div>
 

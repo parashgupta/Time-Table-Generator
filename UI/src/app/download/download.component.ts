@@ -20,7 +20,7 @@ export class DownloadComponent implements OnInit {
   isFormValid: boolean = false;
   additionalInfoDisplay: string = 'none';
   subjects: string[] = [];
-  sections: any;
+  sections: string[] =[];
   sectionvalue: boolean = false;
   days: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   timetable: any;
@@ -66,6 +66,18 @@ export class DownloadComponent implements OnInit {
             }
           );
         }
+        else{
+          this.semesterService.showtimetable(this.selectedCourse, this.selectedSemester,this.selectedSection).subscribe(
+            (data) => {
+              this.timetable = data;
+              console.log(this.timetable);
+              console.log(this.selectedSection);
+            },
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+          );
+        }
       },
       (error) => {
         console.error('Error fetching checksection:', error);
@@ -91,6 +103,7 @@ export class DownloadComponent implements OnInit {
   }
 
   animateButton(): void {
+    this.semesterService.downloadtimetable(this.selectedCourse, this.selectedSemester,this.selectedSection).subscribe();
     const button = this.buttonElement.nativeElement;
     button.classList.add('onclic');
     setTimeout(() => {
