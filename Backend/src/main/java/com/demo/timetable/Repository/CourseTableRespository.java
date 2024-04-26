@@ -12,6 +12,6 @@ import com.demo.timetable.Entity.CourseTable;
 public interface CourseTableRespository extends CrudRepository<CourseTable,Integer>{
 
     @Query("SELECT tableid_pk FROM CourseTable WHERE csid_fk= :csid_fk and secid_fk= :secid_fk")
-    public Iterable<Integer> findCourseTableId(@Param("csid_fk") Integer csid_fk,@Param("secid_fk") Integer secid_fk);
+    public Integer findCourseTableId(@Param("csid_fk") Integer csid_fk,@Param("secid_fk") Integer secid_fk);
 
 }

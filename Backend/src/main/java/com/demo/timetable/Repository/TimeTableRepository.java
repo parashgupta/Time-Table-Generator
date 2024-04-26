@@ -11,6 +11,9 @@ import java.util.List;
 @Repository
 public interface TimeTableRepository extends CrudRepository<TimeTable,Integer>{
 
+    @Query("SELECT day,ten,eleven,twelve,one,two,three FROM TimeTable WHERE tableid_fk = :tableid_fk")
+    Iterable<TimeTable> findAllByTableId(@Param("tableid_fk") Integer tableid_fk);
+
 
   
 

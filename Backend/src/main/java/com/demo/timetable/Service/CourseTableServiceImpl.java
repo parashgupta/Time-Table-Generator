@@ -89,13 +89,10 @@ private TimeTableServiceImpl timeTableServiceImpl;
     public Iterable<TimeTable> finalTimeTable(String courseName, String semester, String secName) {
         
         Integer csid_fk=courseSemesterRepository.findCourseSemesterId(courseName, semester);
-        System.out.println("csid=============="+csid_fk);
         Integer secid_fk=sectionRepository.findSectionId(secName);
-        System.out.println("section=============="+secid_fk);
-
-        Iterable<Integer> tableid_pk=courseTableRespository.findCourseTableId(csid_fk,secid_fk);
-        System.out.println("time=============="+tableid_pk);
-        return timeTableRepository.findAllById(tableid_pk);
+        Integer tableid_pk=courseTableRespository.findCourseTableId(csid_fk,secid_fk);
+        System.out.println("==============================================>"+tableid_pk);
+        return timeTableRepository.findAllByTableId(tableid_pk);
         // return courseSemesterRepository.findAll();
         
     }
