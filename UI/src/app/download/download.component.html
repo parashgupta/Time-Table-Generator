@@ -42,14 +42,11 @@
                       </thead>
                       <tbody>
                         <!-- Loop through the days array to generate rows -->
-                        <tr *ngFor="let dataItem of timetable">
-                          <td class="day-column">{{dataItem.day }}</td>
-                          <td class="csid-column">{{ dataItem.ten }}</td>
-                          <td class="cid_f-column">{{ dataItem.eleven }}</td>
-                          <td class="cid_f-column">{{ dataItem.twelve }}</td>
-                          <td class="semester-column">{{ dataItem.one }}</td>
-                          <td class="section-column">{{ dataItem.two }}</td>
-                          <td class="section-column">{{ dataItem.three }}</td>
+                        <tr *ngFor="let dataRow of timetable">
+                          <ng-container *ngFor="let item of dataRow; let i = index">
+                            <td *ngIf="i === 0" class="day-column">{{ item }}</td>
+                            <td *ngIf="i !== 0" class="class-column">{{ item }}</td>
+                          </ng-container>
                         </tr>
                       </tbody>
                     </table>

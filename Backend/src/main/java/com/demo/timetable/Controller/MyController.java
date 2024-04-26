@@ -117,6 +117,18 @@ public void setCourseTable(@RequestBody Map<String, Object> subjectWithFaculty) 
         String semester = (String) subjectWithFaculty.get("semester");
         String section = (String) subjectWithFaculty.get("section");
         Map<String, Object> data = (Map<String, Object>) subjectWithFaculty.get("subjectWithFaculty");
+        Map<String, String> data1 = new HashMap<>();
+
+        for (Map.Entry<String, Object> entry : data.entrySet()) {
+        String key = entry.getKey();
+        Object value = entry.getValue();
+
+    
+        String stringValue = String.valueOf(value); // Handles null values gracefully
+
+    
+        data1.put(key, stringValue);
+}
 
         // Now you can use courseName, semester, and subjectWithFaculty as needed
         System.out.println("Course Name: " + courseName);
@@ -126,18 +138,11 @@ public void setCourseTable(@RequestBody Map<String, Object> subjectWithFaculty) 
         for (Map.Entry<String, Object> entry : data.entrySet()) {
             System.out.println("Subject: " + entry.getKey() + ", Faculty: " + entry.getValue());
         }
-        
+        courseTableService.setCourseTable(courseName, semester , section,data1);  
+
     } catch (Exception e) {
         System.err.println("Error processing request: " + e.getMessage());
         e.printStackTrace();
     }
-
-    Map<String,String> allot=new HashMap<>();
-    allot.put("Automata Theory and Compiler Construction","chaitali");
-    allot.put("Cloud Computing","nitin");
-    allot.put("Artificial Intelligence and Machine Learning","deepak");
-    allot.put("Information Security","ajay");
-    allot.put("Internet of Things", "preeti");
-    courseTableService.setCourseTable("MCA", "3rd sem" , "A",allot);  
 }
 }
