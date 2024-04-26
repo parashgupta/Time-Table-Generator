@@ -33,34 +33,39 @@ export class CourseComponent implements OnInit {
   
   onSubmit(): void {
     console.log('Submit button clicked');
-  
-    const requests = [];
-  
-    if (this.selectedSection !== '') {
-      console.log('Inserting section name:', this.selectedSection);
-      requests.push(
-        this.semesterService.insertSectionName(this.selectedCourse, this.selectedSemester, this.selectedSection)
-      );
-    }
-    
     const dataMap = new Map<string, string>();
     this.subjects.forEach((subject, index) => {
         dataMap.set(subject, this.selectedFaculty[index]);
     });
     console.log(dataMap);
-
-    requests.push(
-      this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester,this.selectedSection, dataMap)
-    );
+    
+    this.semesterService.insertSectionName(this.selectedCourse, this.selectedSemester, this.selectedSection).subscribe(() => {
+      this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester,this.selectedSection, dataMap).subscribe(() => {
+        // Both APIs have completed
+        console.log('Both APIs executed successfully.');
+        // Perform any UI updates here
+      });
+    });
+    // const requests = [];
+    // if (this.selectedSection !== '') {
+    //   console.log('Inserting section name:', this.selectedSection);
+    //   requests.push(
+    //     this.semesterService.insertSectionName(this.selectedCourse, this.selectedSemester, this.selectedSection)
+    //   );
+    // }
   
-    forkJoin(requests).subscribe(
-      (responses) => {
-        console.log('All requests completed:', responses);
-      },
-      (error) => {
-        console.error('Error during requests:', error);
-      }
-    );
+    // requests.push(
+    //   this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester,this.selectedSection, dataMap)
+    // );
+  
+    // forkJoin(requests).subscribe(
+    //   (responses) => {
+    //     console.log('All requests completed:', responses);
+    //   },
+    //   (error) => {
+    //     console.error('Error during requests:', error);
+    //   }
+    // );
 
   }
 
