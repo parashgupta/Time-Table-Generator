@@ -1,14 +1,19 @@
-<div class="main-container">  
-    <div class="container">
-      <h2>Login Page</h2>
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter Username" #usernameInput>
+
+  <form id="loginform">
+    <div class="main-container">  
+      <div class="container">
+        <h2>Login Page</h2>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" [(ngModel)]="username" placeholder="Enter Username" required>
+        </div>
+                 
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Enter Password" required>
+        </div>            
+        <input type="button" value="Login" (click)="onLogin()">
       </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter Password" #passwordInput>
-      </div>      
-      <input type="button" value="Login" (click)="onLogin(usernameInput.value, passwordInput.value)">
     </div>
-  </div>
+  </form>
+  

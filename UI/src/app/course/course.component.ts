@@ -42,23 +42,7 @@ export class CourseComponent implements OnInit {
         this.semesterService.insertSectionName(this.selectedCourse, this.selectedSemester, this.selectedSection)
       );
     }
-  
-    // for (let i = 0; i < this.subjects.length; i++) {
-    //   console.log(`Allotting faculty for subject ${this.subjects[i]} and faculty ${this.selectedFaculty[i]}`);
-    //   requests.push(
-    //     this.semesterService.allotFaculty(this.selectedCourse, this.selectedSemester, this.subjects[i], this.selectedFaculty[i])
-    //   );
-    // }
-  
-    // forkJoin(requests).subscribe(
-    //   (responses) => {
-    //     console.log('All requests completed:', responses);
-    //   },
-    //   (error) => {
-    //     console.error('Error during requests:', error);
-    //   }
-    // );
-
+    
     const dataMap = new Map<string, string>();
     this.subjects.forEach((subject, index) => {
         dataMap.set(subject, this.selectedFaculty[index]);

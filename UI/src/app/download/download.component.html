@@ -26,7 +26,7 @@
                     </select>
                   </div>
 
-                  <div class="timetable">
+                  <div *ngIf="timetable" class="timetable">
                     <table border="2">
                       <thead>
                         <!-- Fixed first row -->
@@ -50,8 +50,10 @@
                         </tr>
                       </tbody>
                     </table>
+                    <div class="container1">
+                      <button id="button" #buttonElement (click)="animateButton()"></button>
+                    </div>
                   </div>                  
-                  
                   
                   
         </div>

@@ -8,18 +8,25 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
+  username: string = '';
+  password: string = '';
+  
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onLogin(username: string, password: string): void {
-    if (!username || !password) {
-    } else if (username === 'parash' && password === '123') {
+  onLogin(): void {
+    if (!this.username || !this.password) {
+      //this.showSnackbar('Please enter both username and password', 'error');
+    } else if (this.username === 'parash' && this.password === '123') {
       this.router.navigate(['/home']);
       console.log('Login successful!');
     } else {
       console.log('Invalid username or password');
+      //this.showSnackbar('Invalid username or password', 'error');
+
     }
   }
+
 }

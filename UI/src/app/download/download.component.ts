@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SemesterService } from '../semester.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { SemesterService } from '../semester.service';
   styleUrls: ['./download.component.css']
 })
 export class DownloadComponent implements OnInit {
+  @ViewChild('buttonElement') buttonElement!: ElementRef;
 
   constructor(private http: HttpClient, private semesterService: SemesterService) {}
 
@@ -88,6 +89,19 @@ export class DownloadComponent implements OnInit {
     );
     console.log("onSectionChange completed");
   }
+
+  animateButton(): void {
+    const button = this.buttonElement.nativeElement;
+    button.classList.add('onclic');
+    setTimeout(() => {
+      button.classList.remove('onclic');
+      button.classList.add('validate');
+      setTimeout(() => {
+        button.classList.remove('validate');
+      }, 1250);
+    }, 2250);
+  }
+
 
 
 }
